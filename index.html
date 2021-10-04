@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Currency Converter</title>
+		<link rel="stylesheet" href="./style.css">
+	</head>
+	<body>
+		<section>
+			<h1>Currency Converter</h1>
+			<div class="row">
+				<p>convert</p>
+				<div class="field">
+					<select id="currency1" tabindex="1">
+						<option value="USD">US$</option>
+						<option value="BRL">R$</option>
+						<option value="EUR">€</option>
+						<option value="JPY">JP¥</option>
+					</select>
+					<input type="text" id="amount1" tabindex="2" placeholder="0,00">
+				</div>
+			</div>
+			
+			<div class="row">
+				<p>to</p>
+				<div class="field">
+					<select id="currency2" tabindex="3">
+						<option value="BRL">R$</option>
+						<option value="USD">US$</option>
+						<option value="EUR">€</option>
+						<option value="JPY">JP¥</option>
+					</select>
+					<input type="text" id="amount2" tabindex="4" placeholder="0,00">
+				</div>
+			</div>
+		</section>
+		<script type="module" src="./js/index.js"></script>
+	</body>
+</html>

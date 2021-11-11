@@ -1,5 +1,6 @@
 'use strict';
 import { checkCurrency } from './selects.js';
+import { onDebug } from './index.js';
 
 const getInputs = document.querySelectorAll('input[type="text"]');
 
@@ -10,10 +11,11 @@ async function convertCurrency(event){
 	let inputToShowValue, quotation;
 
 	if(elementId === 'amount1'){
-		quotation = await getQuotations(currencies['currency1'], currencies['currency2']);
+		quotation = !onDebug ? await getQuotations(currencies['currency1'], currencies['currency2']) : 5;
 		inputToShowValue = getInputs[1];
 	} else {
-		quotation = await getQuotations(currencies['currency2'], currencies['currency1']);
+		quotation = !onDebug ? await getQuotations(currencies['currency2'], currencies['currency1']) : 5;
+
 		inputToShowValue = getInputs[0];
 	}
 	
@@ -25,7 +27,7 @@ async function handleSelectChange(){
 	const currencies = checkCurrency();
 	const value = Number(getInputs[0].value.replace(',','.'));
 
-	const quotation = await getQuotations(currencies['currency1'], currencies['currency2']);
+	const quotation = !onDebug ? await getQuotations(currencies['currency1'], currencies['currency2']) : 5;
 	const valueConverted = (value * Number(quotation)).toFixed(2).replace('.',',');
 	getInputs[1].value = valueConverted;
 }

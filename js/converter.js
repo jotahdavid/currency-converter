@@ -7,7 +7,7 @@ const getInputs = document.querySelectorAll('input[type="text"]');
 async function convertCurrency(event){
 	const currencies = checkCurrency();
 	const elementId = event.target.id;
-	const value = Number(event.target.value.replace(',','.')); 
+	const value = Number(event.target.value.replace(',','.'));
 	let inputToShowValue, quotation;
 
 	if(elementId === 'amount1'){
@@ -18,7 +18,7 @@ async function convertCurrency(event){
 
 		inputToShowValue = getInputs[0];
 	}
-	
+
 	const valueConverted = (value * quotation).toFixed(2).replace('.',',');
 	inputToShowValue.value = valueConverted;
 }
@@ -36,7 +36,7 @@ async function getQuotations(fromCurrency, toCurrency){
 	const url = `https://economia.awesomeapi.com.br/json/last/${fromCurrency}-${toCurrency}`;
 	const data = await fetch(url);
 	const dataJSON = await data.json();
-	
+
 	const quotation = dataJSON[fromCurrency+toCurrency].bid;
 	return quotation;
 }

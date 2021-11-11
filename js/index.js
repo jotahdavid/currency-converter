@@ -9,7 +9,7 @@ function registerEvents(){
 		checkCurrency(event);
 		handleSelectChange(event);
 	}));
-	
+
 	getInputs.forEach((inputs) => inputs.addEventListener('input', (event) => {
 		convertCurrency(event);
 	}));

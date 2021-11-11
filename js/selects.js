@@ -1,8 +1,8 @@
 'use strict';
 const getSelects = document.querySelectorAll('select');
-let previousCurrencies = { 
-	currency1: getSelects[0].value, 
-	currency2: getSelects[1].value 
+let previousCurrencies = {
+	currency1: getSelects[0].value,
+	currency2: getSelects[1].value
 };
 
 function checkCurrency(event){
@@ -18,7 +18,7 @@ function checkCurrency(event){
 
 function getCurrentCurrencies(){
 	const currencies = {};
-	getSelects.forEach((_, i) => { 
+	getSelects.forEach((_, i) => {
 		currencies[`currency${i+1}`] = getSelects[i].value;
 	});
 	return currencies;

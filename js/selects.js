@@ -5,10 +5,10 @@ let previousCurrencies = {
 	currency2: getSelects[1].value
 };
 
-function checkCurrency(event){
+function checkCurrency(event) {
 	const currentCurrencies = getCurrentCurrencies();
 	const areEqualOptions = currentCurrencies['currency1'] === currentCurrencies['currency2'];
-	if(areEqualOptions){
+	if (areEqualOptions) {
 		changeOption(currentCurrencies, previousCurrencies, event);
 	}
 
@@ -16,7 +16,7 @@ function checkCurrency(event){
 	return currentCurrencies;
 }
 
-function getCurrentCurrencies(){
+function getCurrentCurrencies() {
 	const currencies = {};
 	getSelects.forEach((_, i) => {
 		currencies[`currency${i+1}`] = getSelects[i].value;
@@ -24,9 +24,9 @@ function getCurrentCurrencies(){
 	return currencies;
 }
 
-function changeOption(currentCurrencies, previousCurrencies, event){
+function changeOption(currentCurrencies, previousCurrencies, event) {
 	const elementId = event.target.id;
-	if(elementId !== 'currency1'){
+	if (elementId !== 'currency1') {
 		getSelects[0].value = previousCurrencies['currency2'];
 		currentCurrencies['currency1'] = previousCurrencies['currency2'];
 	} else {

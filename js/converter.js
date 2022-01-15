@@ -3,19 +3,19 @@ import { checkCurrency } from './selects.js';
 import { onDebug } from './index.js';
 
 const getInputs = document.querySelectorAll('input[type="text"]');
+const getQuotations = memoizerQuotations();
 
-async function convertCurrency(event){
+async function convertCurrency(event) {
 	const currencies = checkCurrency();
 	const elementId = event.target.id;
 	const value = Number(event.target.value.replace(',','.'));
 	let inputToShowValue, quotation;
 
-	if(elementId === 'amount1'){
+	if (elementId === 'amount1') {
 		quotation = !onDebug ? await getQuotations(currencies['currency1'], currencies['currency2']) : 5;
 		inputToShowValue = getInputs[1];
 	} else {
 		quotation = !onDebug ? await getQuotations(currencies['currency2'], currencies['currency1']) : 5;
-
 		inputToShowValue = getInputs[0];
 	}
 
@@ -23,7 +23,7 @@ async function convertCurrency(event){
 	inputToShowValue.value = valueConverted;
 }
 
-async function handleSelectChange(){
+async function handleSelectChange() {
 	const currencies = checkCurrency();
 	const value = Number(getInputs[0].value.replace(',','.'));
 
@@ -32,13 +32,27 @@ async function handleSelectChange(){
 	getInputs[1].value = valueConverted;
 }
 
-async function getQuotations(fromCurrency, toCurrency){
+async function fetchQuotations(fromCurrency, toCurrency) {
 	const url = `https://economia.awesomeapi.com.br/json/last/${fromCurrency}-${toCurrency}`;
 	const data = await fetch(url);
 	const dataJSON = await data.json();
 
 	const quotation = dataJSON[fromCurrency+toCurrency].bid;
 	return quotation;
+}
+
+function memoizerQuotations() {
+  const cache = {};
+  return async function(from, to) {
+    const currencies = `${from}-${to}`;
+    if (cache[currencies]) {
+      return cache[currencies];
+    } else {
+      const result = await fetchQuotations(from, to);
+      cache[currencies] = result;
+      return result;
+    }
+  };
 }
 
 export { convertCurrency, handleSelectChange, getInputs };

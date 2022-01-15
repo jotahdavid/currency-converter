@@ -4,7 +4,7 @@ import { checkCurrency, getSelects } from './selects.js';
 
 const onDebug = false;
 
-function registerEvents(){
+function registerEvents() {
 	getSelects.forEach(selects => selects.addEventListener('change', (event) => {
 		checkCurrency(event);
 		handleSelectChange(event);
